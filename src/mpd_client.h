@@ -143,6 +143,9 @@ typedef struct {
     const char* statefile;
     bool stickers;
     bool mixramp;
+    bool auth;
+    const char* authfile;
+    const char* authrealm;
 } t_config;
 
 t_config config;
