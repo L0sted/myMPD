@@ -1398,6 +1398,7 @@ function parseState(obj) {
         for (var i = 0; i < domCache.btnsPlayLen; i++)
             domCache.btnsPlay[i].innerText = 'pause';
         playstate = 'play';
+        audio.play();
     } else {
         for (var i = 0; i < domCache.btnsPlayLen; i++)
             domCache.btnsPlay[i].innerText = 'play_arrow';
