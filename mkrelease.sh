@@ -47,7 +47,7 @@ echo "Compiling and installing mympd"
 cd release
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_BUILD_TYPE=RELEASE ..
 make
-sudo make install
+make install
 cd ..
 
 sudo debian/postinst
