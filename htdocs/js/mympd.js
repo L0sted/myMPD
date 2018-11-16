@@ -35,6 +35,7 @@ var progressTimer;
 var deferredPrompt;
 var dragEl;
 var playlistEl;
+var audio = document.getElementById('inPageSnd');
 
 var app = {};
 app.apps = { "Playback":   { "state": "0/-/", "scrollPos": 0 },
@@ -312,6 +313,7 @@ function appRoute() {
 function appInit() {
     getSettings();
     sendAPI({"cmd": "MPD_API_PLAYER_STATE"}, parseState);
+    // audio.load();
 
     webSocketConnect();
 
@@ -693,6 +695,8 @@ function appInit() {
     window.addEventListener('appinstalled', function(event) {
         console.log('myMPD installed as app');
     });
+    audio.src = settings.mpdstream;
+
 }
 
 function parseCmd(event, href) {
@@ -1190,6 +1194,9 @@ function parseSettings(obj) {
         appRoute();
     else if (app.current.app == 'Browse' && app.current.tab == 'Database' && app.current.search != '')
         appRoute();
+
+    audio.src = settings.mpdstream;
+
 }
 
 function setCols(table, className) {
@@ -2584,9 +2591,15 @@ function updateDBfinished(idleEvent) {
 
 function clickPlay() {
     if (playstate != 'play')
+    {
         sendAPI({"cmd": "MPD_API_PLAYER_PLAY"});
+        audio.play();
+    }    
     else
+    {
         sendAPI({"cmd": "MPD_API_PLAYER_PAUSE"});
+        audio.pause();
+}
 }
 
 function clickStop() {
